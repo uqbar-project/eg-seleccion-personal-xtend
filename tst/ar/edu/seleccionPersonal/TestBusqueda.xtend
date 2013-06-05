@@ -35,9 +35,7 @@ class TestBusqueda {
 		externo = new Externo
 				
 		externoConExperiencia = new Externo
-		var puestos = new ArrayList<String>
-		puestos.add("Analista")
-		puestos.add("Programador")
+		var puestos = new ArrayList<String>(#{"Analista", "Programador"})
 		externoConExperiencia.puestosAnteriores = puestos 
 				
 		cargoProgramador = new Cargo
