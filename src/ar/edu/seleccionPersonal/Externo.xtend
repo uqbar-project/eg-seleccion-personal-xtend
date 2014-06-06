@@ -11,15 +11,11 @@ class Externo extends Postulante {
 		puestosAnteriores = new ArrayList<String>	
 	}
 	
-	override validarPostulacion(BusquedaInterna interna) {
+	override dispatch validarPostulacion(BusquedaInterna interna) {
 		throw new UnsupportedOperationException("No puede postularse a búsquedas internas")
 	}
 
-	override validarPostulacion(BusquedaExterna externa) {
-		// OK
-	}
-	
-	override validarPostulacion(BusquedaEspecial especial) {
+	override dispatch validarPostulacion(BusquedaEspecial especial) {
 		if (!puestosAnteriores.contains(especial.puesto)) {
 			throw new UnsupportedOperationException("Para poder postularse debe haber trabajado anteriormente en el mismo puesto")
 		}
