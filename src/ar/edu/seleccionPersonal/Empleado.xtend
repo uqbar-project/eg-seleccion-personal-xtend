@@ -6,7 +6,7 @@ import java.util.List
 
 import static extension ar.edu.seleccionPersonal.DateUtil.*
 
-abstract class Empleado extends Postulante {
+abstract class Empleado implements Postulante {
 
 	@Property Cargo cargo
 	@Property String sector

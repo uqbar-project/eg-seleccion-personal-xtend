@@ -24,6 +24,8 @@ abstract class Busqueda {
 		this.agregarPostulante(postulante)
 	}
 	
-	def void validarPostulacion(Postulante postulante)
+	def void validarPostulacion(Postulante postulante) {
+		
+	}
 	
 }

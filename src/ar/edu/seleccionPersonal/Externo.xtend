@@ -3,7 +3,7 @@ package ar.edu.seleccionPersonal
 import java.util.ArrayList
 import java.util.List
 
-class Externo extends Postulante {
+class Externo implements Postulante {
 	
 	@Property List<String> puestosAnteriores
 	
@@ -11,14 +11,8 @@ class Externo extends Postulante {
 		puestosAnteriores = new ArrayList<String>	
 	}
 	
-	override dispatch validarPostulacion(BusquedaInterna interna) {
-		throw new UnsupportedOperationException("No puede postularse a búsquedas internas")
+	def trabajoEn(String puesto) {
+		puestosAnteriores.contains(puesto)
 	}
 
-	override dispatch validarPostulacion(BusquedaEspecial especial) {
-		if (!puestosAnteriores.contains(especial.puesto)) {
-			throw new UnsupportedOperationException("Para poder postularse debe haber trabajado anteriormente en el mismo puesto")
-		}
-	}
-	
 }
