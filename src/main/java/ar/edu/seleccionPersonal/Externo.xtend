@@ -2,10 +2,12 @@ package ar.edu.seleccionPersonal
 
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Externo extends Postulante {
 	
-	@Property List<String> puestosAnteriores
+	List<String> puestosAnteriores
 	
 	new() {
 		puestosAnteriores = new ArrayList<String>	

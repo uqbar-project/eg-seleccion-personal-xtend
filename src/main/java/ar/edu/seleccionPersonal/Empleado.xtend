@@ -3,15 +3,17 @@ package ar.edu.seleccionPersonal
 import java.util.ArrayList
 import java.util.Date
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension ar.edu.seleccionPersonal.DateUtil.*
 
+@Accessors
 abstract class Empleado extends Postulante {
 
-	@Property Cargo cargo
-	@Property String sector
-	@Property Date fechaIngreso
-	@Property List<Empleado> personasACargo
+	Cargo cargo
+	String sector
+	Date fechaIngreso
+	List<Empleado> personasACargo
 
 	new() {
 		personasACargo = new ArrayList<Empleado>
