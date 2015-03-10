@@ -3,13 +3,15 @@ package ar.edu.seleccionPersonal
 import java.math.BigDecimal
 import java.util.ArrayList
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 abstract class Busqueda {
 
-	@Property List<Postulante> postulantes
-	@Property BigDecimal remuneracion
-	@Property String sector
-	@Property String puesto
+	List<Postulante> postulantes
+	BigDecimal remuneracion
+	String sector
+	String puesto
 
 	new() { 
 		postulantes = new ArrayList<Postulante>

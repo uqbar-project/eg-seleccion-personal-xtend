@@ -1,8 +1,11 @@
 package ar.edu.seleccionPersonal
 
+import org.eclipse.xtend.lib.annotations.Accessors
+
+@Accessors
 class PersonalPlanta extends Empleado {
 	
-	@Property Cargo cargo
+	Cargo cargo
 	
 	def sueldo() {
 		cargo.sueldo	
