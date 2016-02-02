@@ -1,4 +1,4 @@
-package ar.edu.seleccionPersonal
+package ar.edu.seleccionPersonalMethodDispatch
 
 import java.util.ArrayList
 import java.util.List

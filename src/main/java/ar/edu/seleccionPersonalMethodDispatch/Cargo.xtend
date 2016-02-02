@@ -1,4 +1,4 @@
-package ar.edu.seleccionPersonal
+package ar.edu.seleccionPersonalMethodDispatch
 
 import java.math.BigDecimal
 import org.eclipse.xtend.lib.annotations.Accessors

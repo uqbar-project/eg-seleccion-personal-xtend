@@ -1,4 +1,4 @@
-package ar.edu.seleccionPersonal
+package ar.edu.seleccionPersonalMethodDispatch
 
 class PersonalContratado extends Empleado {
 

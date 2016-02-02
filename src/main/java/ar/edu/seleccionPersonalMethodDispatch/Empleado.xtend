@@ -1,11 +1,11 @@
-package ar.edu.seleccionPersonal
+package ar.edu.seleccionPersonalMethodDispatch
 
 import java.util.ArrayList
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
-import static extension ar.edu.seleccionPersonal.DateUtil.*
+import static extension ar.edu.seleccionPersonalMethodDispatch.DateUtil.*
 
 @Accessors
 abstract class Empleado implements Postulante {

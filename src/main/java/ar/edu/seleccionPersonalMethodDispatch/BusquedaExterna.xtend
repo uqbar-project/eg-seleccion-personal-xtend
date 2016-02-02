@@ -1,6 +1,6 @@
-package ar.edu.seleccionPersonal
+package ar.edu.seleccionPersonalMethodDispatch
 
-import ar.edu.seleccionPersonal.Busqueda
+import ar.edu.seleccionPersonalMethodDispatch.Busqueda
 
 class BusquedaExterna extends Busqueda {
 
