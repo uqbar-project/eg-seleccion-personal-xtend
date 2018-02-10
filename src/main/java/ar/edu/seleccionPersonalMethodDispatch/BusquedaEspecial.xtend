@@ -17,8 +17,11 @@ class BusquedaEspecial extends Busqueda {
 	}
 	
 	def dispatch validarPostulacion(PersonalPlanta empleado) {
-		if ((remuneracion < empleado.sueldo) || empleado.cantidadPersonasACargo >= 10) {
-			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo y la remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+		if (remuneracion < empleado.sueldo) {
+			throw new UnsupportedOperationException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+		}
+		if (empleado.cantidadPersonasACargo >= 10) {
+			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda externa")
 		}
 	}
 

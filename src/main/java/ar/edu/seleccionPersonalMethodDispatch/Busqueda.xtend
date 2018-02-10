@@ -1,21 +1,16 @@
 package ar.edu.seleccionPersonalMethodDispatch
 
 import java.math.BigDecimal
-import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 abstract class Busqueda {
 
-	List<Postulante> postulantes
+	List<Postulante> postulantes = newArrayList
 	BigDecimal remuneracion
 	String sector
 	String puesto
-
-	new() { 
-		postulantes = new ArrayList<Postulante>
-	}
 
 	def agregarPostulante(Postulante postulante) {
 		postulantes.add(postulante)

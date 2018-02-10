@@ -1,7 +1,7 @@
 package ar.edu.seleccionPersonalMethodDispatch
 
+import java.time.LocalDate
 import java.util.ArrayList
-import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
@@ -12,20 +12,20 @@ abstract class Empleado implements Postulante {
 
 	Cargo cargo
 	String sector
-	Date fechaIngreso
+	LocalDate fechaIngreso
 	List<Empleado> personasACargo
 
 	new() {
 		personasACargo = new ArrayList<Empleado>
-		fechaIngreso = new Date	
+		fechaIngreso = LocalDate.now	
 	}
 	
-	def int getFechaAntiguedad(Date fecha) {
-		fecha.diferenciaCon(fechaIngreso)
+	def getFechaAntiguedad(LocalDate hoy) {
+		hoy.diferenciaCon(fechaIngreso)
 	}
-
+	
 	def getFechaAntiguedad() {
-		getFechaAntiguedad(new Date)
+		LocalDate.now().fechaAntiguedad
 	}
 
 	def int cantidadPersonasACargo() {

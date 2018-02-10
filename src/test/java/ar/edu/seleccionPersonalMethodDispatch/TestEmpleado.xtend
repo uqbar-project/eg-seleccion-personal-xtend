@@ -1,6 +1,6 @@
 package ar.edu.seleccionPersonalMethodDispatch
 
-import java.util.Date
+import java.time.LocalDate
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -11,13 +11,14 @@ class TestEmpleado {
 	
 	@Before
 	def void init() {
-		lopez = new PersonalPlanta
-		lopez.fechaIngreso = new Date(108, 2, 14)
+		lopez = new PersonalPlanta => [
+			fechaIngreso = LocalDate.of(2008, 2, 14)
+		]
 	}
 	
 	@Test
 	def void testAntiguedadDeLopez() {
-		Assert::assertEquals(6, lopez.getFechaAntiguedad(new Date(113, 8, 15)))	
+		Assert.assertEquals(6, lopez.getFechaAntiguedad(LocalDate.of(2013, 8, 15)))	
 	}
 	
 }
