@@ -1,11 +1,10 @@
 package ar.edu.seleccionPersonalMethodDispatch
 
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-
-import static extension ar.edu.seleccionPersonalMethodDispatch.DateUtil.*
 
 @Accessors
 abstract class Empleado implements Postulante {
@@ -20,8 +19,8 @@ abstract class Empleado implements Postulante {
 		fechaIngreso = LocalDate.now	
 	}
 	
-	def getFechaAntiguedad(LocalDate hoy) {
-		hoy.diferenciaCon(fechaIngreso)
+	def getFechaAntiguedad(LocalDate dia) {
+		ChronoUnit.YEARS.between(fechaIngreso, dia)
 	}
 	
 	def getFechaAntiguedad() {

@@ -18,7 +18,7 @@ class TestEmpleado {
 	
 	@Test
 	def void testAntiguedadDeLopez() {
-		Assert.assertEquals(6, lopez.getFechaAntiguedad(LocalDate.of(2013, 8, 15)))	
+		Assert.assertEquals(5, lopez.getFechaAntiguedad(LocalDate.of(2013, 8, 15)))	
 	}
 	
 }
