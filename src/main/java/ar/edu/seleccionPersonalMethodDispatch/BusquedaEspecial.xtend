@@ -12,16 +12,16 @@ class BusquedaEspecial extends Busqueda {
 
 	def dispatch validarPostulacion(Externo externo) {
 		if (!externo.trabajoEn(puesto)) {
-			throw new UnsupportedOperationException("Para poder postularse debe haber trabajado anteriormente en el mismo puesto")
+			throw new UnsupportedOperationException("Para poder postularse debe haber trabajado anteriormente en el puesto de " + puesto)
 		}
 	}
 	
 	def dispatch validarPostulacion(PersonalPlanta empleado) {
 		if (remuneracion < empleado.sueldo) {
-			throw new UnsupportedOperationException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+			throw new UnsupportedOperationException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda especial")
 		}
-		if (empleado.cantidadPersonasACargo >= 10) {
-			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda externa")
+		if (empleado.cantidadPersonasACargo < 10) {
+			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda especial")
 		}
 	}
 

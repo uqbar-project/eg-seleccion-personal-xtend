@@ -19,6 +19,10 @@ abstract class Empleado implements Postulante {
 		fechaIngreso = LocalDate.now	
 	}
 	
+	def void agregarPersonaACargo(Empleado empleado) {
+		personasACargo.add(empleado)
+	}
+	
 	def getFechaAntiguedad(LocalDate dia) {
 		ChronoUnit.YEARS.between(fechaIngreso, dia)
 	}

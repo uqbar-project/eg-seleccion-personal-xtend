@@ -12,33 +12,41 @@ class TestBusqueda {
 	Busqueda especial
 
 	PersonalPlanta lopez
+	PersonalPlanta gonzalez
+	PersonalPlanta gimenez
 	PersonalContratado contratadoMismoSectorMenosUnAnio
 	PersonalContratado contratadoDistintoSectorMas5Anios
+	PersonalContratado contratadoDistintoSectorMenos5Anios
 	Externo externo
 	Externo externoConExperiencia
+	
 	Cargo cargoProgramador
+	Cargo cargoTester
 
 	@Before
 	def void init() {
 		interna = new BusquedaInterna => [
 			sector = "Sistemas"
+			puesto = "Programador"
 		]
 
 		externa = new BusquedaExterna => [
 			sector = "Sistemas"
+			puesto = "Programador"
 			remuneracion = new BigDecimal(10000)
 		]
 
 		especial = new BusquedaEspecial => [
 			sector = "Sistemas"
-			remuneracion = new BigDecimal(4000)
+			puesto = "Programador"
+			remuneracion = new BigDecimal(7000)
 		]
 
 		externo = new Externo
 
 		externoConExperiencia = new Externo => [
-			trabajoEn("Analista")
-			trabajoEn("Programador")
+			trabajarDe("Programador")
+			trabajarDe("Analista")
 		]
 
 		cargoProgramador = new Cargo => [
@@ -46,6 +54,11 @@ class TestBusqueda {
 			sueldo = new BigDecimal(6000)
 		]
 
+		cargoTester = new Cargo => [
+			descripcion = "Tester"
+			sueldo = new BigDecimal(126000)
+		]
+		
 		contratadoMismoSectorMenosUnAnio = new PersonalContratado => [
 			sector = "Sistemas"
 		]
@@ -55,8 +68,22 @@ class TestBusqueda {
 			fechaIngreso = LocalDate.of(2014, 5, 9)
 		]
 
+		contratadoDistintoSectorMenos5Anios = new PersonalContratado => [
+			sector = "Contabilidad"
+			fechaIngreso = LocalDate.now().minusYears(1)
+		]
+		
 		lopez = new PersonalPlanta => [
 			cargo = cargoProgramador
+		]
+		
+		gonzalez = new PersonalPlanta => [
+			cargo = cargoProgramador
+		]
+		(1..25).forEach [ gonzalez.agregarPersonaACargo(new PersonalPlanta) ]
+		
+		gimenez = new PersonalPlanta => [
+			cargo = cargoTester
 		]
 	}
 
@@ -103,15 +130,35 @@ class TestBusqueda {
 	def void testLopezNoSePuedePostularABusquedaEspecial() {
 		especial.postular(lopez)
 	}
+	
+	@Test(expected=typeof(UnsupportedOperationException))
+	def void testGimenezNoSePuedePostularABusquedaEspecial() {
+		especial.postular(gimenez)
+	}
 
+	@Test
+	def void testGonzalezSePuedePostularABusquedaExterna() {
+		especial.postular(gonzalez)
+	}
+	
 	@Test(expected=typeof(UnsupportedOperationException))
 	def void testContratadoNoSePuedePostularABusquedaEspecial() {
 		especial.postular(contratadoDistintoSectorMas5Anios)
 	}
 
 	@Test(expected=typeof(UnsupportedOperationException))
+	def void testContratadoQueSePuedePostularABusquedaEspecial() {
+		especial.postular(contratadoDistintoSectorMenos5Anios)
+	}
+
+	@Test(expected=typeof(UnsupportedOperationException))
 	def void testExternoNoSePuedePostularABusquedaEspecial() {
 		especial.postular(externo)
+	}
+
+	@Test
+	def void testExternoQueSePuedePostularABusquedaEspecial() {
+		especial.postular(externoConExperiencia)
 	}
 
 	@Test
