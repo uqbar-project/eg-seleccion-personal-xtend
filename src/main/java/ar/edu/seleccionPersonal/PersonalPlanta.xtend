@@ -8,7 +8,7 @@ class PersonalPlanta extends Empleado {
 	Cargo cargo
 	
 	def sueldo() {
-		cargo.sueldo	
+		cargo.sueldo
 	}
 	
 	override validarPostulacion(BusquedaInterna externa) {
@@ -20,8 +20,11 @@ class PersonalPlanta extends Empleado {
 	}
 	
 	override validarPostulacion(BusquedaEspecial externa) {
-		if ((externa.remuneracion < this.sueldo) || this.cantidadPersonasACargo >= 10) {
-			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo y la remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+		if (externa.remuneracion < this.sueldo) {
+			throw new UnsupportedOperationException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+		}
+		if (this.cantidadPersonasACargo < 10) {
+			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda externa")
 		}
 	}
 	

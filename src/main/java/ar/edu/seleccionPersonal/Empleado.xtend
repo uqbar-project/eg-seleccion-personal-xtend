@@ -1,34 +1,37 @@
 package ar.edu.seleccionPersonal
 
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.ArrayList
-import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-
-import static extension ar.edu.seleccionPersonal.DateUtil.*
 
 @Accessors
 abstract class Empleado extends Postulante {
 
 	Cargo cargo
 	String sector
-	Date fechaIngreso
+	LocalDate fechaIngreso
 	List<Empleado> personasACargo
 
 	new() {
 		personasACargo = new ArrayList<Empleado>
-		fechaIngreso = new Date	
+		fechaIngreso = LocalDate.now	
 	}
 	
-	def int getFechaAntiguedad(Date fecha) {
-		fecha.diferenciaCon(fechaIngreso)
+	def void agregarPersonaACargo(Empleado empleado) {
+		personasACargo.add(empleado)
 	}
-
+	
+	def getFechaAntiguedad(LocalDate dia) {
+		ChronoUnit.YEARS.between(fechaIngreso, dia)
+	}
+	
 	def getFechaAntiguedad() {
-		getFechaAntiguedad(new Date)
+		LocalDate.now().fechaAntiguedad
 	}
 
-	def int cantidadPersonasACargo() {
+	def cantidadPersonasACargo() {
 		personasACargo.size
 	}
 	

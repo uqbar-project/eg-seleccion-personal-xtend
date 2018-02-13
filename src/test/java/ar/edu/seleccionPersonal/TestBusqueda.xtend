@@ -1,62 +1,96 @@
 package ar.edu.seleccionPersonal
 
 import java.math.BigDecimal
+import java.time.LocalDate
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.util.Date
-import java.util.ArrayList
 
 class TestBusqueda {
 	Busqueda interna
 	Busqueda externa
 	Busqueda especial
-	
+
 	PersonalPlanta lopez
+	PersonalPlanta gonzalez
+	PersonalPlanta gimenez
 	PersonalContratado contratadoMismoSectorMenosUnAnio
 	PersonalContratado contratadoDistintoSectorMas5Anios
+	PersonalContratado contratadoDistintoSectorMenos5Anios
 	Externo externo
 	Externo externoConExperiencia
-	Cargo cargoProgramador
 	
+	Cargo cargoProgramador
+	Cargo cargoTester
+
 	@Before
 	def void init() {
-		interna = new BusquedaInterna
-		interna.sector = "Sistemas"
+		interna = new BusquedaInterna => [
+			sector = "Sistemas"
+			puesto = "Programador"
+		]
 
-		externa = new BusquedaExterna
-		externa.sector = "Sistemas"
-		externa.remuneracion = new BigDecimal(10000)
-		
-		especial = new BusquedaEspecial
-		especial.sector = "Sistemas"
-		especial.remuneracion = new BigDecimal(4000)
-		
+		externa = new BusquedaExterna => [
+			sector = "Sistemas"
+			puesto = "Programador"
+			remuneracion = new BigDecimal(10000)
+		]
+
+		especial = new BusquedaEspecial => [
+			sector = "Sistemas"
+			puesto = "Programador"
+			remuneracion = new BigDecimal(7000)
+		]
+
 		externo = new Externo
-				
-		externoConExperiencia = new Externo
-		var puestos = new ArrayList<String>(#{"Analista", "Programador"})
-		externoConExperiencia.puestosAnteriores = puestos 
-				
-		cargoProgramador = new Cargo
-		cargoProgramador.descripcion = "Programador"
-		cargoProgramador.sueldo = new BigDecimal(6000)
-		
-		contratadoMismoSectorMenosUnAnio = new PersonalContratado
-		contratadoMismoSectorMenosUnAnio.sector = "Sistemas" 
 
-		contratadoDistintoSectorMas5Anios = new PersonalContratado
-		contratadoDistintoSectorMas5Anios.sector = "Contabilidad"
-		contratadoDistintoSectorMas5Anios.fechaIngreso = new Date(104, 4, 9) 
+		externoConExperiencia = new Externo => [
+			trabajarDe("Programador")
+			trabajarDe("Analista")
+		]
+
+		cargoProgramador = new Cargo => [
+			descripcion = "Programador"
+			sueldo = new BigDecimal(6000)
+		]
+
+		cargoTester = new Cargo => [
+			descripcion = "Tester"
+			sueldo = new BigDecimal(126000)
+		]
 		
-		lopez = new PersonalPlanta
-		lopez.cargo = cargoProgramador
+		contratadoMismoSectorMenosUnAnio = new PersonalContratado => [
+			sector = "Sistemas"
+		]
+
+		contratadoDistintoSectorMas5Anios = new PersonalContratado => [
+			sector = "Contabilidad"
+			fechaIngreso = LocalDate.of(2014, 5, 9)
+		]
+
+		contratadoDistintoSectorMenos5Anios = new PersonalContratado => [
+			sector = "Contabilidad"
+			fechaIngreso = LocalDate.now().minusYears(1)
+		]
+		
+		lopez = new PersonalPlanta => [
+			cargo = cargoProgramador
+		]
+		
+		gonzalez = new PersonalPlanta => [
+			cargo = cargoProgramador
+		]
+		(1..25).forEach [ gonzalez.agregarPersonaACargo(new PersonalPlanta) ]
+		
+		gimenez = new PersonalPlanta => [
+			cargo = cargoTester
+		]
 	}
-	
+
 	@Test
 	def void testLopezSePuedePostularABusquedaInterna() {
 		interna.postular(lopez)
-		Assert::assertTrue(interna.postulantes.contains(lopez))
+		Assert.assertTrue(interna.postulantes.contains(lopez))
 	}
 
 	@Test(expected=typeof(UnsupportedOperationException))
@@ -67,18 +101,18 @@ class TestBusqueda {
 	@Test
 	def void testContratadoMismoSectorSePuedePostularABusquedaInterna() {
 		interna.postular(contratadoMismoSectorMenosUnAnio)
-		Assert::assertTrue(interna.postulantes.contains(contratadoMismoSectorMenosUnAnio))
+		Assert.assertTrue(interna.postulantes.contains(contratadoMismoSectorMenosUnAnio))
 	}
 
 	@Test(expected=typeof(UnsupportedOperationException))
 	def void testSePuedePostularABusquedaInterna() {
 		interna.postular(externo)
 	}
-	
+
 	@Test
 	def void testExternoSePuedePostularABusquedaExterna() {
 		externa.postular(externo)
-		Assert::assertTrue(externa.postulantes.contains(externo))
+		Assert.assertTrue(externa.postulantes.contains(externo))
 	}
 
 	@Test(expected=typeof(UnsupportedOperationException))
@@ -89,28 +123,48 @@ class TestBusqueda {
 	@Test
 	def void testContratadoRecienteSePuedePostularABusquedaExterna() {
 		externa.postular(contratadoMismoSectorMenosUnAnio)
-		Assert::assertTrue(externa.postulantes.contains(contratadoMismoSectorMenosUnAnio))
+		Assert.assertTrue(externa.postulantes.contains(contratadoMismoSectorMenosUnAnio))
 	}
-	
+
 	@Test(expected=typeof(UnsupportedOperationException))
 	def void testLopezNoSePuedePostularABusquedaEspecial() {
 		especial.postular(lopez)
 	}
 	
 	@Test(expected=typeof(UnsupportedOperationException))
+	def void testGimenezNoSePuedePostularABusquedaEspecial() {
+		especial.postular(gimenez)
+	}
+
+	@Test
+	def void testGonzalezSePuedePostularABusquedaExterna() {
+		especial.postular(gonzalez)
+	}
+	
+	@Test(expected=typeof(UnsupportedOperationException))
 	def void testContratadoNoSePuedePostularABusquedaEspecial() {
 		especial.postular(contratadoDistintoSectorMas5Anios)
 	}
-	
+
+	@Test(expected=typeof(UnsupportedOperationException))
+	def void testContratadoQueSePuedePostularABusquedaEspecial() {
+		especial.postular(contratadoDistintoSectorMenos5Anios)
+	}
+
 	@Test(expected=typeof(UnsupportedOperationException))
 	def void testExternoNoSePuedePostularABusquedaEspecial() {
 		especial.postular(externo)
 	}
-	
+
+	@Test
+	def void testExternoQueSePuedePostularABusquedaEspecial() {
+		especial.postular(externoConExperiencia)
+	}
+
 	@Test
 	def void testExternoConExperienciaSePuedePostularABusquedaExterna() {
 		externa.postular(externoConExperiencia)
-		Assert::assertTrue(externa.postulantes.contains(externoConExperiencia))
+		Assert.assertTrue(externa.postulantes.contains(externoConExperiencia))
 	}
-	
+
 }

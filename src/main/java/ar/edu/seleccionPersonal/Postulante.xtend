@@ -9,8 +9,8 @@ abstract class Postulante {
 	
 	def void validarPostulacion(BusquedaExterna externa) 
 	
-	def void validarPostulacion(BusquedaInterna externa)
+	def void validarPostulacion(BusquedaInterna interna)
 	
-	def void validarPostulacion(BusquedaEspecial externa)
+	def void validarPostulacion(BusquedaEspecial especial)
 	
 }
