@@ -22,7 +22,7 @@ abstract class Busqueda {
 	}
 	
 	def void validarPostulacion(Postulante postulante) {
-		
+		// ok		
 	}
 	
 }

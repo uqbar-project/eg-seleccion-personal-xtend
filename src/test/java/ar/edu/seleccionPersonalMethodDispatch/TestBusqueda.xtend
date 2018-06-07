@@ -22,6 +22,7 @@ class TestBusqueda {
 	
 	Cargo cargoProgramador
 	Cargo cargoTester
+	Cargo cargoAnalista
 
 	@Before
 	def void init() {
@@ -44,11 +45,6 @@ class TestBusqueda {
 
 		externo = new Externo
 
-		externoConExperiencia = new Externo => [
-			trabajarDe("Programador")
-			trabajarDe("Analista")
-		]
-
 		cargoProgramador = new Cargo => [
 			descripcion = "Programador"
 			sueldo = new BigDecimal(6000)
@@ -58,7 +54,17 @@ class TestBusqueda {
 			descripcion = "Tester"
 			sueldo = new BigDecimal(126000)
 		]
+
+		cargoAnalista = new Cargo => [
+			descripcion = "Analista"
+			sueldo = new BigDecimal(10000)
+		]
 		
+		externoConExperiencia = new Externo => [
+			trabajarDe(cargoProgramador)
+			trabajarDe(cargoAnalista)
+		]
+				
 		contratadoMismoSectorMenosUnAnio = new PersonalContratado => [
 			sector = "Sistemas"
 		]
