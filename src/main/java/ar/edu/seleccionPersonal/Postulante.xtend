@@ -7,10 +7,10 @@ abstract class Postulante {
 		throw new UnsupportedOperationException("Debe utilizar un tipo de búsqueda específico")
 	}
 	
-	def void validarPostulacion(BusquedaExterna externa) 
+	def void validarPostulacionBusquedaInterna(BusquedaInterna interna)
 	
-	def void validarPostulacion(BusquedaInterna interna)
-	
-	def void validarPostulacion(BusquedaEspecial especial)
+	def void validarPostulacionBusquedaExterna(BusquedaExterna externa) 
+
+	def void validarPostulacionBusquedaEspecial(BusquedaEspecial especial)
 	
 }

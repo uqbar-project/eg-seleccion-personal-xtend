@@ -5,7 +5,7 @@ import ar.edu.seleccionPersonal.Busqueda
 class BusquedaEspecial extends Busqueda {
 	
 	override validarPostulacion(Postulante postulante) {
-		postulante.validarPostulacion(this)
+		postulante.validarPostulacionBusquedaEspecial(this)
 	}
 
 }
