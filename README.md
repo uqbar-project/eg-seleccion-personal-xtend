@@ -16,6 +16,6 @@ El enunciado está [aquí](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZG
 
 ## Branches
 
-* [__dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/dispatch): trabaja con double dispatch manual
-* [__double-dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/double-dispatch): trabaja con method dispatch de xtend
+* [__double-dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/double-dispatch): trabaja con double dispatch manual
+* [__dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/dispatch): trabaja con method dispatch de xtend
 
