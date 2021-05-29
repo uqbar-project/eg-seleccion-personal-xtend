@@ -16,15 +16,15 @@ class PersonalPlanta extends Empleado {
 	}
 
 	override validarPostulacionBusquedaExterna(BusquedaExterna externa) {
-		throw new UnsupportedOperationException("Un empleado de planta no puede postularse a una búsqueda externa")
+		throw new BusinessException("Un empleado de planta no puede postularse a una búsqueda externa")
 	}
 	
 	override validarPostulacionBusquedaEspecial(BusquedaEspecial externa) {
 		if (externa.remuneracion < this.sueldo) {
-			throw new UnsupportedOperationException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
+			throw new BusinessException("La remuneración de la búsqueda debe superar el sueldo actual para postularse a una búsqueda externa")
 		}
 		if (this.cantidadPersonasACargo < 10) {
-			throw new UnsupportedOperationException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda externa")
+			throw new BusinessException("Debe tener al menos 10 personas a cargo para postularse a una búsqueda externa")
 		}
 	}
 	

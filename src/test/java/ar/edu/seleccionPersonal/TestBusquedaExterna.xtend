@@ -8,16 +8,9 @@ import org.junit.jupiter.api.Test
 import static org.junit.jupiter.api.Assertions.assertTrue
 import static org.junit.jupiter.api.Assertions.assertThrows
 
-@DisplayName("Dada una búsqueda externas")
+@DisplayName("Dada una búsqueda externa")
 class TestBusquedaExterna {
 	Busqueda externa
-
-	PersonalPlanta empleadoPlanta
-	PersonalContratado contratadoMenosUnAnio
-	PersonalContratado contratadoMasUnAnio
-	Externo externo
-	
-	Cargo cargoProgramador
 
 	@BeforeEach
 	def void init() {
@@ -26,39 +19,30 @@ class TestBusquedaExterna {
 			puesto = "Programador"
 			remuneracion = new BigDecimal(10000)
 		]
-
-		externo = new Externo
-
-		cargoProgramador = new Cargo => [
-			descripcion = "Programador"
-			sueldo = new BigDecimal(6000)
-		]
-
-		contratadoMenosUnAnio = new PersonalContratado => [
-			sector = "Sistemas"
-		]
-
-		contratadoMasUnAnio = new PersonalContratado => [
-			sector = "Contabilidad"
-			fechaIngreso = LocalDate.of(2014, 5, 9)
-		]
-
-		empleadoPlanta = new PersonalPlanta => [
-			cargo = cargoProgramador
-		]
 	}
 
 	@Test
 	@DisplayName("un externo puede postularse")
 	def void testExternoSePuedePostularABusquedaExterna() {
+		val externo = new Externo
+
 		externa.postular(externo)
-		assertTrue(externa.postulantes.contains(externo))
+
+		assertTrue(externa.estaPostulado(externo))
 	}
 
 	@Test
 	@DisplayName("un empleado de planta no puede postularse")
 	def void testEmpleadoNoSePuedePostularABusquedaExterna() {
-		assertThrows(UnsupportedOperationException, [
+		val	cargoProgramador = new Cargo => [
+			descripcion = "Programador"
+			sueldo = new BigDecimal(6000)
+		]
+		val empleadoPlanta = new PersonalPlanta => [
+			cargo = cargoProgramador
+		]
+
+		assertThrows(BusinessException, [
 			externa.postular(empleadoPlanta)
 		])
 	}
@@ -66,14 +50,24 @@ class TestBusquedaExterna {
 	@Test
 	@DisplayName("un contratado reciente se puede postular")
 	def void testContratadoRecienteSePuedePostularABusquedaExterna() {
+		val contratadoMenosUnAnio = new PersonalContratado => [
+			sector = "Sistemas"
+		]
+		
 		externa.postular(contratadoMenosUnAnio)
-		assertTrue(externa.postulantes.contains(contratadoMenosUnAnio))
+		
+		assertTrue(externa.estaPostulado(contratadoMenosUnAnio))
 	}
 
 	@Test
 	@DisplayName("un contratado con mucha antigüedad no se puede postular")
 	def void testContratadoConMuchaAntiguedadNoSePuedePostularABusquedaExterna() {
-		assertThrows(UnsupportedOperationException, [
+		val contratadoMasUnAnio = new PersonalContratado => [
+			sector = "Contabilidad"
+			fechaIngreso = LocalDate.of(2014, 5, 9)
+		]
+		
+		assertThrows(BusinessException, [
 			externa.postular(contratadoMasUnAnio)
 		])
 	}

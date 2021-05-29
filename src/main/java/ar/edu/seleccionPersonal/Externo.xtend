@@ -17,7 +17,7 @@ class Externo extends Postulante {
 	}
 
 	override validarPostulacionBusquedaInterna(BusquedaInterna interna) {
-		throw new UnsupportedOperationException("No puede postularse a búsquedas internas")
+		throw new BusinessException("No puede postularse a búsquedas internas")
 	}
 
 	override validarPostulacionBusquedaExterna(BusquedaExterna externa) {
@@ -26,7 +26,7 @@ class Externo extends Postulante {
 	
 	override validarPostulacionBusquedaEspecial(BusquedaEspecial especial) {
 		if (!puestosAnteriores.contains(especial.puesto)) {
-			throw new UnsupportedOperationException("Para poder postularse debe haber trabajado anteriormente en el mismo puesto")
+			throw new BusinessException("Para poder postularse debe haber trabajado anteriormente en el mismo puesto")
 		}
 	}
 	
