@@ -12,14 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue
 class TestBusquedaInterna {
 	Busqueda interna
 
-	PersonalPlanta empleado
-
-	PersonalContratado contratadoMismoSector
-	PersonalContratado contratadoDistintoSector
-
-	Externo externo
-	
-	Cargo cargoProgramador
+	def	cargoProgramador() {
+		new Cargo => [
+			descripcion = "Programador"
+			sueldo = new BigDecimal(6000)
+		]
+	} 
 
 	@BeforeEach
 	def void init() {
@@ -27,38 +25,27 @@ class TestBusquedaInterna {
 			sector = "Sistemas"
 			puesto = "Programador"
 		]
-
-		externo = new Externo
-
-		cargoProgramador = new Cargo => [
-			descripcion = "Programador"
-			sueldo = new BigDecimal(6000)
-		]
-
-		contratadoMismoSector = new PersonalContratado => [
-			sector = "Sistemas"
-		]
-
-		contratadoDistintoSector = new PersonalContratado => [
-			sector = "Contabilidad"
-		]
-
-		empleado = new PersonalPlanta => [
-			cargo = cargoProgramador
-		]
 	}
 
 	@Test
 	@DisplayName("un empleado puede postularse")
 	def void testEmpleadoSePuedePostularABusquedaInterna() {
+		val empleado = new PersonalPlanta => [
+			cargo = cargoProgramador
+		]
+
 		interna.postular(empleado)
-		assertTrue(interna.postulantes.contains(empleado))
+		assertTrue(interna.estaPostulado(empleado))
 	}
 
 	@Test
 	@DisplayName("un contratado de otro sector no puede postularse")
 	def void testContratadoDistintoSectorNoSePuedePostularABusquedaInterna() {
-		assertThrows(UnsupportedOperationException, [
+		val contratadoDistintoSector = new PersonalContratado => [
+			sector = "Contabilidad"
+		]
+
+		assertThrows(BusinessException, [
 			interna.postular(contratadoDistintoSector)
 		])
 	}
@@ -66,14 +53,21 @@ class TestBusquedaInterna {
 	@Test
 	@DisplayName("un contratado del mismo sector puede postularse")
 	def void testContratadoMismoSectorSePuedePostularABusquedaInterna() {
+		val contratadoMismoSector = new PersonalContratado => [
+			sector = "Sistemas"
+		]
+
 		interna.postular(contratadoMismoSector)
-		assertTrue(interna.postulantes.contains(contratadoMismoSector))
+
+		assertTrue(interna.estaPostulado(contratadoMismoSector))
 	}
 
 	@Test
 	@DisplayName("un externo no puede postularse")
 	def void testExternoNoSePuedePostularABusquedaInterna() {
-		assertThrows(UnsupportedOperationException, [
+		val externo = new Externo
+
+		assertThrows(BusinessException, [
 			interna.postular(externo)
 		])
 	}
