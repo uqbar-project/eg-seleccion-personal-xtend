@@ -106,11 +106,6 @@
 					<goals>
 						<goal>report</goal>
 					</goals>
-					<configuration>
-						<sourceDirectories>
-						<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-						</sourceDirectories>
-					</configuration>
 					</execution>
 				</executions>
 			</plugin>
