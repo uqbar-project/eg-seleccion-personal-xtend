@@ -19,3 +19,6 @@ El enunciado está [aquí](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZG
 * [__double-dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/double-dispatch): trabaja con double dispatch manual
 * [__dispatch__](https://github.com/uqbar-project/eg-seleccion-personal-xtend/tree/dispatch): trabaja con method dispatch de xtend
 
+## Instalación del entorno Eclipse
+
+Sigan las instrucciones que están [en esta página](https://wiki.uqbar.org/wiki/articles/xtend-preparacion-de-un-entorno-de-desarrollo.html) buscando las últimas versiones de Eclipse y el plugin de Xtend.
