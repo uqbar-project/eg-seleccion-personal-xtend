@@ -1,7 +1,7 @@
 
 # Ejercicio de Diseño - Selección de Personal
 
-[![Build Status](https://travis-ci.org/uqbar-project/eg-seleccion-personal-xtend.svg?branch=dispatch)](https://travis-ci.org/uqbar-project/eg-seleccion-personal-xtend) [![Coverage Status](https://coveralls.io/repos/github/uqbar-project/eg-seleccion-personal-xtend/badge.svg?branch=dispatch&service=github)](https://coveralls.io/github/uqbar-project/eg-seleccion-personal-xtend?branch=dispatch&service=github)
+[![Build & Test](https://github.com/uqbar-project/eg-seleccion-personal-xtend/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-seleccion-personal-xtend/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/uqbar-project/eg-seleccion-personal-xtend/graph/badge.svg?token=Wxg7KM0JcQ)](https://codecov.io/gh/uqbar-project/eg-seleccion-personal-xtend)
 
 <img src="images/personal.png" height="130px" width="130px"/>
 
