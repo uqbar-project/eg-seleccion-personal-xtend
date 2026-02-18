@@ -101,16 +101,11 @@
 					</execution>
 
 					<execution>
-					<id>report</id>
-					<phase>verify</phase>
-					<goals>
-						<goal>report</goal>
-					</goals>
-					<configuration>
-						<sourceDirectories>
-						<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-						</sourceDirectories>
-					</configuration>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
